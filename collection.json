@@ -1,0 +1,46 @@
+[
+  {
+    "id": 3,
+    "name": "Ravil",
+    "coordinates": {
+      "x": 12,
+      "y": 7
+    },
+    "creationDate": "2011-12-03T10:15:30",
+    "salary": 250,
+    "position": "MANAGER_OF_CLEANING",
+    "status": "PROBATION",
+    "person": {
+      "height": 150,
+      "eyeColor": "BLACK",
+      "nationality": "THAILAND",
+      "location": {
+        "x": 12,
+        "y": 10,
+        "name": "floor"
+      }
+    }
+  },
+  {
+    "id": 25,
+    "name": "Alina",
+    "coordinates": {
+      "x": 857,
+      "y": 2
+    },
+    "creationDate": "2023-03-15T10:45:12",
+    "salary": 1556,
+    "position": "DEVELOPER",
+    "status": "HIRED",
+    "person": {
+      "height": 163,
+      "eyeColor": "ORANGE",
+      "nationality": "ITALY",
+      "location": {
+        "x": 13,
+        "y": 586478,
+        "name": "bed"
+      }
+    }
+  }
+]

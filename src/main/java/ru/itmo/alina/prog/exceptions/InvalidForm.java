@@ -1,0 +1,10 @@
+package ru.itmo.alina.prog.exceptions;
+
+import java.io.IOException;
+
+/**
+ * Исключение для неправильно заполненной формы
+ */
+
+public class InvalidForm extends IOException {
+}
