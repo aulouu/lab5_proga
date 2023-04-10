@@ -35,7 +35,7 @@ public class FileManager {
         try {
             this.file = new File(System.getenv(myenv));
         } catch (NullPointerException exception) {
-            console.printError("Системная переменная с загрузочным файлом не найдена! Добавьте её и попробуйте вновь.");
+            console.printError("Системная переменная LABA с загрузочным файлом не найдена! Добавьте системную переменную LABA и попробуйте вновь.");
             System.exit(0);
         } catch (Exception exception) {
             console.printError("Что-то пошло не так. Перезапустите программу.");
