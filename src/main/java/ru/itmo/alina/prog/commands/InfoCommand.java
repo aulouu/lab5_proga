@@ -13,7 +13,7 @@ public class InfoCommand extends Command {
     private CollectionManager collectionManager;
 
     public InfoCommand(Console console, CollectionManager collectionManager) {
-        super("Info", " : вывести информацию о коллекции");
+        super("info", " : вывести информацию о коллекции");
         this.console = console;
         this.collectionManager = collectionManager;
     }

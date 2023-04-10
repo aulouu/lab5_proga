@@ -13,7 +13,7 @@ public class FilterStartsWithNameCommand extends Command {
     private CollectionManager collectionManager;
 
     public FilterStartsWithNameCommand(Console console, CollectionManager collectionManager) {
-        super("FilterStartsWithName", " {name} : вывести элементы, значение поля name которых начинается с заданной подстроки");
+        super("filter_starts_with_name", " {name} : вывести элементы, значение поля name которых начинается с заданной подстроки");
         this.console = console;
         this.collectionManager = collectionManager;
     }

@@ -17,7 +17,7 @@ public class AddIfMinCommand extends Command {
     private CollectionManager collectionManager;
 
     public AddIfMinCommand(Console console, CollectionManager collectionManager) {
-        super("AddIfMin", " {element} : добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекци");
+        super("add_if_min", " {element} : добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекци");
         this.console = console;
         this.collectionManager = collectionManager;
     }

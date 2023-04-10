@@ -51,7 +51,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>Main</mainClass>
+                            <mainClass>ru.itmo.alina.prog.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

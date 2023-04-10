@@ -4,9 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="25b3e240-cddd-43a5-bdeb-9902e69b5fc2" name="Changes" comment="fignya">
+    <list default="true" id="25b3e240-cddd-43a5-bdeb-9902e69b5fc2" name="Changes" comment="zarabotay">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/AddElementCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/AddElementCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/AddIfMinCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/AddIfMinCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/ClearCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/ClearCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/ExecuteScriptCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/ExitCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/ExitCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/FilterByStatusCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/FilterByStatusCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/FilterStartsWithNameCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/FilterStartsWithNameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/HeadCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/HeadCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/HelpCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/HelpCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/InfoCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/InfoCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/RemoveByIDCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/RemoveByIDCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/RemoveGreaterCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/RemoveGreaterCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/RemoveLowerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/RemoveLowerCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/SaveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/ShowCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/ShowCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/UpdateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/UpdateCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/forms/ColorForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/forms/ColorForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/forms/CountryForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/forms/CountryForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/forms/PositionForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/forms/PositionForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/forms/StatusForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/forms/StatusForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +73,7 @@
       <updated>1681142373200</updated>
       <workItem from="1681142375839" duration="3253000" />
       <workItem from="1681149286638" duration="3184000" />
-      <workItem from="1681155100804" duration="873000" />
+      <workItem from="1681155100804" duration="3553000" />
     </task>
     <task id="LOCAL-00001" summary="fignya">
       <created>1681153092416</created>
@@ -62,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681153092416</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="zarabotay">
+      <created>1681156308094</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681156308094</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -81,6 +108,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fignya" />
-    <option name="LAST_COMMIT_MESSAGE" value="fignya" />
+    <MESSAGE value="zarabotay" />
+    <option name="LAST_COMMIT_MESSAGE" value="zarabotay" />
   </component>
 </project>

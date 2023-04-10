@@ -27,7 +27,7 @@ public class ColorForm extends Forms<Color> {
         console.println(Color.names());
         while (true) {
             console.println("Введите цвет глаз: ");
-            String input = scanner.nextLine().trim();
+            String input = scanner.nextLine().trim().toUpperCase();
             try {
                 return Color.valueOf(input);
             } catch (IllegalArgumentException exception) {

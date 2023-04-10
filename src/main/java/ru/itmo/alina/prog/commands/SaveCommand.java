@@ -14,7 +14,7 @@ public class SaveCommand extends Command {
     private FileManager fileManager;
 
     public SaveCommand(Console console, CollectionManager collectionManager, FileManager fileManager) {
-        super("Save", " : сохранить коллекцию в файл");
+        super("save", " : сохранить коллекцию в файл");
         this.console = console;
         this.collectionManager = collectionManager;
         this.fileManager = fileManager;

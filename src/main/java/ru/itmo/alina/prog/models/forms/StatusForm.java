@@ -22,7 +22,7 @@ public class StatusForm extends Forms<Status> {
         console.println(Status.names());
         while (true) {
             console.println("Введите статус: ");
-            String input = scanner.nextLine().trim();
+            String input = scanner.nextLine().trim().toUpperCase();
             try {
                 return Status.valueOf(input);
             } catch (IllegalArgumentException exception) {

@@ -8,7 +8,7 @@ import ru.itmo.alina.prog.exceptions.*;
 
 public class ExitCommand extends Command {
     public ExitCommand() {
-        super("Exit", " : завершить программу без сохранения в файл");
+        super("exit", " : завершить программу без сохранения в файл");
     }
 
     /**

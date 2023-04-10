@@ -17,7 +17,7 @@ public class RemoveLowerCommand extends Command {
     private CollectionManager collectionManager;
 
     public RemoveLowerCommand(Console console, CollectionManager collectionManager) {
-        super("RemoveLower", " id : удалить из коллекции все элементы, ID которых меньше, чем заданный");
+        super("remove_lower", " id : удалить из коллекции все элементы, ID которых меньше, чем заданный");
         this.console = console;
         this.collectionManager = collectionManager;
     }

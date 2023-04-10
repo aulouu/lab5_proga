@@ -22,7 +22,7 @@ public class PositionForm extends Forms<Position> {
         console.println(Position.names());
         while (true) {
             console.println("Введите позицию: ");
-            String input = scanner.nextLine().trim();
+            String input = scanner.nextLine().trim().toUpperCase();
             try {
                 return Position.valueOf(input);
             } catch (IllegalArgumentException exception) {

@@ -13,7 +13,7 @@ public class ExecuteScriptCommand extends Command {
     private ExecuteManager executeManager;
 
     public ExecuteScriptCommand(Console console, ExecuteManager executeManager) {
-        super("ExecuteScript", " file_name : считать и исполнить скрипт из указанного файла");
+        super("execut_script", " file_name : считать и исполнить скрипт из указанного файла");
         this.console = console;
         this.executeManager = executeManager;
     }

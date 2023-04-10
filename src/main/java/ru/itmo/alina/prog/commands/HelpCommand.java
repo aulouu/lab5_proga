@@ -13,7 +13,7 @@ public class HelpCommand extends Command {
     private CommandManager commandManager;
 
     public HelpCommand(Console console, CommandManager commandManager) {
-        super("Help", " : вывести информацию о всех остальных командах");
+        super("help", " : вывести информацию о всех остальных командах");
         this.console = console;
         this.commandManager = commandManager;
     }

@@ -14,7 +14,7 @@ public class FilterByStatusCommand extends Command {
     private CollectionManager collectionManager;
 
     public FilterByStatusCommand(Console console, CollectionManager collectionManager) {
-        super("FilterByStatus", " status : вывести элементы, значение поля status которых равно заданному");
+        super("filter_by_status", " status : вывести элементы, значение поля status которых равно заданному");
         this.console = console;
         this.collectionManager = collectionManager;
     }

@@ -13,7 +13,7 @@ public class HeadCommand extends Command {
     private CollectionManager collectionManager;
 
     public HeadCommand(Console console, CollectionManager collectionManager) {
-        super("Head", " : вывести первый элемент коллекции");
+        super("head", " : вывести первый элемент коллекции");
         this.console = console;
         this.collectionManager = collectionManager;
     }

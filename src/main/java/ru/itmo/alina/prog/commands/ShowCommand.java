@@ -16,7 +16,7 @@ public class ShowCommand extends Command {
     private CollectionManager collectionManager;
 
     public ShowCommand(Console console, CollectionManager collectionManager) {
-        super("Show", " : вывести все элементы коллекции в строковом представлении");
+        super("show", " : вывести все элементы коллекции в строковом представлении");
         this.console = console;
         this.collectionManager = collectionManager;
     }

@@ -26,7 +26,7 @@ public class CountryForm extends Forms<Country> {
         console.println(Country.names());
         while (true) {
             console.println("Введите национальность: ");
-            String input = scanner.nextLine().trim();
+            String input = scanner.nextLine().trim().toUpperCase();
             try {
                 return Country.valueOf(input);
             } catch (IllegalArgumentException exception) {

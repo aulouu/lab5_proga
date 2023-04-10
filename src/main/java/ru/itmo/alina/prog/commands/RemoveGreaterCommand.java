@@ -18,7 +18,7 @@ public class RemoveGreaterCommand extends Command {
     private CollectionManager collectionManager;
 
     public RemoveGreaterCommand(Console console, CollectionManager collectionManager) {
-        super("RemoveGreater", " {element} : удалить из коллекции элементы, превышающие заданный");
+        super("remove_greater", " {element} : удалить из коллекции элементы, превышающие заданный");
         this.console = console;
         this.collectionManager = collectionManager;
     }

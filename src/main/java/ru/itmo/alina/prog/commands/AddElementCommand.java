@@ -14,7 +14,7 @@ public class AddElementCommand extends Command {
     private CollectionManager collectionManager;
 
     public AddElementCommand(Console console, CollectionManager collectionManager) {
-        super("Add", " {element} : добавить новый элемент в коллекцию");
+        super("add", " {element} : добавить новый элемент в коллекцию");
         this.console = console;
         this.collectionManager = collectionManager;
     }

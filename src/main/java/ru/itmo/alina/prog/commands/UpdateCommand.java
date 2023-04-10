@@ -37,6 +37,7 @@ public class UpdateCommand extends Command {
             console.println("Создание нового объекта коллекции.");
             Worker object = new WorkerForm(console).build();
             collectionManager.editById(id, object);
+            console.println("Элемент обновлен.");
         } catch (NoId exception) {
             console.printError("В коллекции нет элемента с таким ID.");
         } catch (NumberFormatException exception) {
