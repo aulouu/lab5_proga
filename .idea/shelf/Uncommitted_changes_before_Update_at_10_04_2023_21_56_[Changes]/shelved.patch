@@ -1,0 +1,564 @@
+Index: collection.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[\r\n  {\r\n    \"id\": 3,\r\n    \"name\": \"Ravil\",\r\n    \"coordinates\": {\r\n      \"x\": 12,\r\n      \"y\": 7\r\n    },\r\n    \"creationDate\": \"2011-12-03T10:15:30\",\r\n    \"salary\": 250,\r\n    \"position\": \"MANAGER_OF_CLEANING\",\r\n    \"status\": \"PROBATION\",\r\n    \"person\": {\r\n      \"height\": 150,\r\n      \"eyeColor\": \"BLACK\",\r\n      \"nationality\": \"THAILAND\",\r\n      \"location\": {\r\n        \"x\": 12,\r\n        \"y\": 10,\r\n        \"name\": \"floor\"\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"id\": 25,\r\n    \"name\": \"Alina\",\r\n    \"coordinates\": {\r\n      \"x\": 857,\r\n      \"y\": 2\r\n    },\r\n    \"creationDate\": \"2023-03-15T10:45:12\",\r\n    \"salary\": 1556,\r\n    \"position\": \"DEVELOPER\",\r\n    \"status\": \"HIRED\",\r\n    \"person\": {\r\n      \"height\": 163,\r\n      \"eyeColor\": \"ORANGE\",\r\n      \"nationality\": \"ITALY\",\r\n      \"location\": {\r\n        \"x\": 13,\r\n        \"y\": 586478,\r\n        \"name\": \"bed\"\r\n      }\r\n    }\r\n  }\r\n]
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/collection.json b/collection.json
+--- a/collection.json	(revision 851eca83246dfe577405d38a436d0847b5063e25)
++++ b/collection.json	(date 1681151195142)
+@@ -4,10 +4,11 @@
+     "name": "Ravil",
+     "coordinates": {
+       "x": 12,
+-      "y": 7
++      "y": 7.0
+     },
+     "creationDate": "2011-12-03T10:15:30",
+     "salary": 250,
++    "startDate": "2011-12-03",
+     "position": "MANAGER_OF_CLEANING",
+     "status": "PROBATION",
+     "person": {
+@@ -16,7 +17,7 @@
+       "nationality": "THAILAND",
+       "location": {
+         "x": 12,
+-        "y": 10,
++        "y": 10.0,
+         "name": "floor"
+       }
+     }
+@@ -26,10 +27,11 @@
+     "name": "Alina",
+     "coordinates": {
+       "x": 857,
+-      "y": 2
++      "y": 2.0
+     },
+     "creationDate": "2023-03-15T10:45:12",
+     "salary": 1556,
++    "startDate": "2005-05-18",
+     "position": "DEVELOPER",
+     "status": "HIRED",
+     "person": {
+@@ -38,9 +40,55 @@
+       "nationality": "ITALY",
+       "location": {
+         "x": 13,
+-        "y": 586478,
++        "y": 586478.0,
+         "name": "bed"
+       }
+     }
++  },
++  {
++    "id": 26,
++    "name": "Anya",
++    "coordinates": {
++      "x": 85,
++      "y": 45.0
++    },
++    "creationDate": "2023-04-10T19:18:02.2221549",
++    "salary": 1000000,
++    "startDate": "2004-10-15",
++    "position": "ENGINEER",
++    "status": "HIRED",
++    "person": {
++      "height": 170,
++      "eyeColor": "ORANGE",
++      "nationality": "VATICAN",
++      "location": {
++        "x": 54,
++        "y": 74.0,
++        "name": "dyb"
++      }
++    }
++  },
++  {
++    "id": 27,
++    "name": "Albert",
++    "coordinates": {
++      "x": 96,
++      "y": 69.0
++    },
++    "creationDate": "2023-04-10T21:25:03.7104721",
++    "salary": 69966996,
++    "startDate": "2004-07-17",
++    "position": "HUMAN_RESOURCES",
++    "status": "RECOMMENDED_FOR_PROMOTION",
++    "person": {
++      "height": 180,
++      "eyeColor": "GREEN",
++      "nationality": "JAPAN",
++      "location": {
++        "x": 25,
++        "y": 52.0,
++        "name": "loop"
++      }
++    }
+   }
+ ]
+\ No newline at end of file
+Index: src/main/java/ru/itmo/alina/prog/managers/FileManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ru.itmo.alina.prog.managers;\r\n\r\nimport com.google.gson.*;\r\nimport com.google.gson.reflect.TypeToken;\r\nimport ru.itmo.alina.prog.console.*;\r\nimport ru.itmo.alina.prog.models.*;\r\n\r\nimport java.io.*;\r\nimport java.nio.charset.StandardCharsets;\r\nimport java.time.LocalDateTime;\r\nimport java.util.ArrayDeque;\r\nimport java.util.Collection;\r\nimport java.util.NoSuchElementException;\r\n\r\n/**\r\n * Файл менеджер - класс для работы с файлом\r\n */\r\n\r\npublic class FileManager {\r\n    private final Print console;\r\n    private final String myenv;\r\n    File file;\r\n\r\n    private final Gson gson = new GsonBuilder()\r\n            .setPrettyPrinting()\r\n            .serializeNulls()\r\n            .registerTypeAdapter(LocalDateTime.class, new TypeAdapter())\r\n            .create();\r\n\r\n    public FileManager(Print console, String file_path) {\r\n        this.console = console;\r\n        this.myenv = file_path;\r\n        try {\r\n            this.file = new File(System.getenv(myenv));\r\n        } catch (NullPointerException exception) {\r\n            console.printError(\"Системная переменная с загрузочным файлом не найдена! Добавьте её и попробуйте вновь.\");\r\n            System.exit(0);\r\n        } catch (Exception exception) {\r\n            console.printError(\"Что-то пошло не так. Перезапустите программу.\");\r\n        }\r\n    }\r\n\r\n    /**\r\n     * Обращение к переменным среды и чтение файла\r\n     *\r\n     * @return коллекция\r\n     */\r\n    public Collection<Worker> readCollection() {\r\n        if (System.getenv(myenv) != null) {\r\n            if (file.exists() && !file.canRead()) {\r\n                console.printError(\"Недостаточно прав для чтения данных из файла. Добавьте права на чтение и запустите программу вновь.\");\r\n                System.exit(0);\r\n            }\r\n            try (var fileReader = new InputStreamReader(new FileInputStream(System.getenv(myenv)))) {\r\n                var collectionType = new TypeToken<ArrayDeque<Worker>>() {}.getType();\r\n                var reader = new BufferedReader(fileReader);\r\n                var jsonStr = new StringBuilder();\r\n                String line;\r\n\r\n                while ((line = reader.readLine()) != null) {\r\n                    line = line.trim();\r\n                    if (!line.equals(\"\")) {\r\n                        jsonStr.append(line);\r\n                    }\r\n                }\r\n\r\n                if (jsonStr.length() == 0) {\r\n                    jsonStr = new StringBuilder(\"[]\");\r\n                }\r\n\r\n                ArrayDeque<Worker> collection = gson.fromJson(jsonStr.toString(), collectionType);\r\n                console.println(\"Коллекция загружена из файла.\");\r\n                return collection;\r\n\r\n            } catch (FileNotFoundException exception) {\r\n                console.printError(\"Файл не найден.\");\r\n                System.exit(0);\r\n            } catch (NoSuchElementException exception) {\r\n                console.printError(\"Файл пустой.\");\r\n                System.exit(0);\r\n            } catch (JsonParseException exception) {\r\n                console.printError(\"В файле не найдена необходимая коллекция.\");\r\n                System.exit(0);\r\n            } catch (IOException | IllegalStateException exception) {\r\n                console.printError(\"Непредвиденная ошибка!\");\r\n                System.exit(0);\r\n            }\r\n        } else {\r\n            System.out.println(\"Системная переменная с загрузочным файлом не найдена!\");\r\n            System.exit(0);\r\n        }\r\n        return new ArrayDeque<>();\r\n    }\r\n    // $ file_path=aboba java -jar sus.jar (aboba путь до файла)\r\n    /*  set A=b\r\n        echo %A% ---> b (выводит b)  */\r\n\r\n    /**\r\n     * Сохранение коллекции из менеджера в файл\r\n     */\r\n    public void saveCollection(Collection<Worker> collection) {\r\n        if (System.getenv(myenv) != null) {\r\n            if (file.exists() && !file.canRead()) {\r\n                console.printError(\"Недостаточно прав для чтения данных из файла. Добавьте права на чтение и запустите программу вновь.\");\r\n            }\r\n            try {\r\n                BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(System.getenv(myenv)));\r\n                bufferedOutputStream.write(gson.toJson(collection).getBytes(StandardCharsets.UTF_8));\r\n                bufferedOutputStream.close();\r\n            } catch (FileNotFoundException exception) {\r\n                console.printError(\"Файл не существует.\");\r\n            } catch (IOException exception) {\r\n                console.printError(\"Произошла непредвиденная ошибка. Коллекция не сохранена.\");\r\n            }\r\n        } else {\r\n            console.printError(\"Системная переменная с загрузочным файлом не найдена!\");\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/itmo/alina/prog/managers/FileManager.java b/src/main/java/ru/itmo/alina/prog/managers/FileManager.java
+--- a/src/main/java/ru/itmo/alina/prog/managers/FileManager.java	(revision 851eca83246dfe577405d38a436d0847b5063e25)
++++ b/src/main/java/ru/itmo/alina/prog/managers/FileManager.java	(date 1681150725348)
+@@ -7,6 +7,7 @@
+ 
+ import java.io.*;
+ import java.nio.charset.StandardCharsets;
++import java.time.LocalDate;
+ import java.time.LocalDateTime;
+ import java.util.ArrayDeque;
+ import java.util.Collection;
+@@ -24,7 +25,8 @@
+     private final Gson gson = new GsonBuilder()
+             .setPrettyPrinting()
+             .serializeNulls()
+-            .registerTypeAdapter(LocalDateTime.class, new TypeAdapter())
++            .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
++            .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+             .create();
+ 
+     public FileManager(Print console, String file_path) {
+Index: .idea/uiDesigner.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/uiDesigner.xml b/.idea/uiDesigner.xml
+new file mode 100644
+--- /dev/null	(date 1681150725766)
++++ b/.idea/uiDesigner.xml	(date 1681150725766)
+@@ -0,0 +1,124 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Palette2">
++    <group name="Swing">
++      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
++      </item>
++      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.svg" removable="false" auto-create-binding="false" can-attach-label="true">
++        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
++        <initial-values>
++          <property name="text" value="Button" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="RadioButton" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="CheckBox" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
++        <initial-values>
++          <property name="text" value="Label" />
++        </initial-values>
++      </item>
++      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
++          <preferred-size width="150" height="-1" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
++          <preferred-size width="150" height="50" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
++          <preferred-size width="200" height="200" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.svg" removable="false" auto-create-binding="true" can-attach-label="true">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
++      </item>
++      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
++      </item>
++      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
++          <preferred-size width="-1" height="20" />
++        </default-constraints>
++      </item>
++      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.svg" removable="false" auto-create-binding="false" can-attach-label="false">
++        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
++      </item>
++      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.svg" removable="false" auto-create-binding="true" can-attach-label="false">
++        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
++      </item>
++    </group>
++  </component>
++</project>
+\ No newline at end of file
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\"\r\n         xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n         xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">\r\n    <modelVersion>4.0.0</modelVersion>\r\n\r\n    <groupId>ru.itmo.alina.prog</groupId>\r\n    <artifactId>lab5_proga</artifactId>\r\n    <version>1.0-SNAPSHOT</version>\r\n\r\n    <properties>\r\n        <maven.compiler.source>17</maven.compiler.source>\r\n        <maven.compiler.target>17</maven.compiler.target>\r\n        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>\r\n    </properties>\r\n    \r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/pom.xml b/pom.xml
+--- a/pom.xml	(revision 851eca83246dfe577405d38a436d0847b5063e25)
++++ b/pom.xml	(date 1681142743954)
+@@ -6,12 +6,26 @@
+ 
+     <groupId>ru.itmo.alina.prog</groupId>
+     <artifactId>lab5_proga</artifactId>
+-    <version>1.0-SNAPSHOT</version>
++    <version>1.0-FINAL</version>
++
++    <dependencies>
++        <dependency>
++            <groupId>org.apache.maven.plugins</groupId>
++            <artifactId>maven-install-plugin</artifactId>
++            <version>3.1.0</version>
++            <type>maven-plugin</type>
++        </dependency>
++        <dependency>
++            <groupId>com.google.code.gson</groupId>
++            <artifactId>gson</artifactId>
++            <version>2.10.1</version>
++        </dependency>
++    </dependencies>
+ 
+     <properties>
+         <maven.compiler.source>17</maven.compiler.source>
+         <maven.compiler.target>17</maven.compiler.target>
+         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     </properties>
+-    
++
+ </project>
+\ No newline at end of file
+Index: src/main/java/ru/itmo/alina/prog/models/forms/WorkerForm.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ru.itmo.alina.prog.models.forms;\r\n\r\nimport ru.itmo.alina.prog.console.*;\r\nimport ru.itmo.alina.prog.managers.ScannerManager;\r\nimport ru.itmo.alina.prog.models.*;\r\n\r\nimport java.time.LocalDateTime;\r\nimport java.util.Scanner;\r\n\r\npublic class WorkerForm extends Forms<Worker> {\r\n    private final Print console;\r\n    private final Scanner scanner = ScannerManager.getScanner();\r\n\r\n    public WorkerForm(Print console) {\r\n        this.console = (ScannerManager.isFileMode())\r\n                ? new EmptyConsole()\r\n                : console;\r\n    }\r\n\r\n    /**\r\n     * Сконструирует объект класса {@link Worker}\r\n     *\r\n     * @return объект {@link Worker}\r\n     */\r\n    @Override\r\n    public Worker build() {\r\n        return new Worker(askName(), askCoordinates(), LocalDateTime.now(), askSalary(), askPosition(), askStatus(), askPerson());\r\n    }\r\n\r\n    public String askName() {\r\n        String name;\r\n        while (true) {\r\n            console.println(\"Введите имя:\");\r\n            name = scanner.nextLine().trim();\r\n            if (name.isBlank()) {\r\n                console.printError(\"Имя не может быть пустым.\");\r\n                if (ScannerManager.isFileMode()) return \"\";\r\n            } else {\r\n                return name;\r\n            }\r\n        }\r\n    }\r\n\r\n    public Coordinates askCoordinates() {\r\n        return new CoordinatesForm(console).build();\r\n    }\r\n\r\n    public long askSalary() {\r\n        while (true) {\r\n            console.println(\"Введите зарплату: \");\r\n            String input = scanner.nextLine().trim();\r\n            try {\r\n                if (Long.parseLong(input) <= 0) {\r\n                    console.printError(\"Зарплата должна быть больше 0.\");\r\n                    if (ScannerManager.isFileMode()) return -1;\r\n                } else {\r\n                    return Long.parseLong(input);\r\n                }\r\n            } catch (NumberFormatException exception) {\r\n                console.printError(\"Зарплата должна быть числом типа long\");\r\n            } catch (Throwable throwable) {\r\n                console.printError(\"Непредвиденная ошибка!\");\r\n            }\r\n        }\r\n    }\r\n\r\n    public Position askPosition() {\r\n        return new PositionForm(console).build();\r\n    }\r\n\r\n    public Status askStatus() {\r\n        return new StatusForm(console).build();\r\n    }\r\n\r\n    public Person askPerson() {\r\n        return new PersonForm(console).build();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/itmo/alina/prog/models/forms/WorkerForm.java b/src/main/java/ru/itmo/alina/prog/models/forms/WorkerForm.java
+--- a/src/main/java/ru/itmo/alina/prog/models/forms/WorkerForm.java	(revision 851eca83246dfe577405d38a436d0847b5063e25)
++++ b/src/main/java/ru/itmo/alina/prog/models/forms/WorkerForm.java	(date 1681150681681)
+@@ -4,7 +4,10 @@
+ import ru.itmo.alina.prog.managers.ScannerManager;
+ import ru.itmo.alina.prog.models.*;
+ 
++import java.time.LocalDate;
+ import java.time.LocalDateTime;
++import java.time.format.DateTimeFormatter;
++import java.time.format.DateTimeParseException;
+ import java.util.Scanner;
+ 
+ public class WorkerForm extends Forms<Worker> {
+@@ -24,7 +27,7 @@
+      */
+     @Override
+     public Worker build() {
+-        return new Worker(askName(), askCoordinates(), LocalDateTime.now(), askSalary(), askPosition(), askStatus(), askPerson());
++        return new Worker(askName(), askCoordinates(), LocalDateTime.now(), askSalary(), askStartDate(), askPosition(), askStatus(), askPerson());
+     }
+ 
+     public String askName() {
+@@ -64,6 +67,19 @@
+         }
+     }
+ 
++    public LocalDate askStartDate() {
++        while (true) {
++            console.println("Введите дату начала работы в формате 2011-12-03 : ");
++            String input = scanner.nextLine().trim();
++            try {
++                DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
++                return LocalDate.parse(input, formatter);
++            } catch (DateTimeParseException exception) {
++                console.printError("Неверный формат.");
++            }
++        }
++    }
++
+     public Position askPosition() {
+         return new PositionForm(console).build();
+     }
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"17\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 851eca83246dfe577405d38a436d0847b5063e25)
++++ b/.idea/misc.xml	(date 1681142430702)
+@@ -1,6 +1,13 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="MavenProjectsManager">
++    <option name="originalFiles">
++      <list>
++        <option value="$PROJECT_DIR$/pom.xml" />
++      </list>
++    </option>
++  </component>
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"25b3e240-cddd-43a5-bdeb-9902e69b5fc2\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2OF3ByudmZFqE1SPqJTcAzS4BT9\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"WebServerToolWindowFactoryState\": \"false\"\r\n  }\r\n}]]></component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"25b3e240-cddd-43a5-bdeb-9902e69b5fc2\" name=\"Changes\" comment=\"\" />\r\n      <created>1681142373200</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1681142373200</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 851eca83246dfe577405d38a436d0847b5063e25)
++++ b/.idea/workspace.xml	(date 1681152415270)
+@@ -1,7 +1,20 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="AutoImportSettings">
++    <option name="autoReloadType" value="SELECTIVE" />
++  </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="25b3e240-cddd-43a5-bdeb-9902e69b5fc2" name="Changes" comment="" />
++    <list default="true" id="25b3e240-cddd-43a5-bdeb-9902e69b5fc2" name="Changes" comment="">
++      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/collection.json" beforeDir="false" afterPath="$PROJECT_DIR$/collection.json" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/FileManager.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/TypeAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/LocalDateTimeAdapter.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/Worker.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/forms/WorkerForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/models/forms/WorkerForm.java" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -9,6 +22,9 @@
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
++  </component>
++  <component name="MarkdownSettingsMigration">
++    <option name="stateVersion" value="1" />
+   </component>
+   <component name="ProjectId" id="2OF3ByudmZFqE1SPqJTcAzS4BT9" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+@@ -20,9 +36,20 @@
+   "keyToString": {
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "WebServerToolWindowFactoryState": "false"
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "last_opened_file_path": "C:/Users/Алина/Desktop/лабы ПРОГА/lab5_proga"
+   }
+ }]]></component>
++  <component name="RecentsManager">
++    <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Users\Алина\IdeaProjects\lab5_proga" />
++      <recent name="C:\Users\Алина\IdeaProjects\lab5_proga\src\main\java\ru\itmo\alina\prog" />
++    </key>
++    <key name="CopyClassDialog.RECENTS_KEY">
++      <recent name="ru.itmo.alina.prog.managers" />
++    </key>
++  </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+@@ -31,8 +58,13 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1681142373200</updated>
++      <workItem from="1681142375839" duration="3253000" />
++      <workItem from="1681149286638" duration="2242000" />
+     </task>
+     <servers />
++  </component>
++  <component name="TypeScriptGeneratedFilesManager">
++    <option name="version" value="3" />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+     <option name="TAB_STATES">
+Index: src/main/java/ru/itmo/alina/prog/managers/TypeAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/itmo/alina/prog/managers/TypeAdapter.java b/src/main/java/ru/itmo/alina/prog/managers/LocalDateTimeAdapter.java
+rename from src/main/java/ru/itmo/alina/prog/managers/TypeAdapter.java
+rename to src/main/java/ru/itmo/alina/prog/managers/LocalDateTimeAdapter.java
+--- a/src/main/java/ru/itmo/alina/prog/managers/TypeAdapter.java	(revision 851eca83246dfe577405d38a436d0847b5063e25)
++++ b/src/main/java/ru/itmo/alina/prog/managers/LocalDateTimeAdapter.java	(date 1681150725342)
+@@ -6,7 +6,7 @@
+ import java.time.LocalDateTime;
+ import java.time.format.DateTimeFormatter;
+ 
+-public class TypeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
++public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
+     private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+ 
+     @Override
+Index: src/main/java/ru/itmo/alina/prog/models/Worker.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package ru.itmo.alina.prog.models;\r\n\r\nimport java.time.LocalDateTime;\r\nimport java.util.ArrayDeque;\r\nimport java.util.Objects;\r\n\r\n/**\r\n * Класс для рабочего\r\n */\r\n\r\npublic class Worker implements Validator, Comparable<Worker> {\r\n    private int id; //Значение поля должно быть больше 0, быть уникальным, генерироваться автоматически\r\n    private String name; // Поле не может быть null, строка не может быть пустой\r\n    private Coordinates coordinates; // Поле не может быть null\r\n    private LocalDateTime creationDate; // Поле не может быть null, значение должно генерироваться автоматически\r\n    private long salary; // Значение поля должно быть больше 0\r\n    private Position position; // Поле не может быть null\r\n    private Status status; // Поле может быть null\r\n    private Person person; // Поле не может быть null\r\n\r\n    private static int nextID = 0;\r\n\r\n    public Worker(String name, Coordinates coordinates, LocalDateTime creationDate, long salary, Position position, Status status, Person person) {\r\n        this.id = incNextId();\r\n        this.name = name;\r\n        this.coordinates = coordinates;\r\n        this.creationDate = creationDate;\r\n        this.salary = salary;\r\n        this.position = position;\r\n        this.status = status;\r\n        this.person = person;\r\n    }\r\n\r\n    /**\r\n     * Увеличивает ID\r\n     *\r\n     * @return следующий ID, чтобы они не повторялись\r\n     */\r\n    private static int incNextId() {\r\n        return nextID++;\r\n    }\r\n\r\n    /**\r\n     * Обновляет ID для следующего элемента\r\n     *\r\n     * @param collection коллекция, в которой получаем ID\r\n     */\r\n\r\n    public static void updateId(ArrayDeque<Worker> collection) {\r\n        int maxId = 0;\r\n        for (Worker worker : collection) {\r\n            if (Objects.isNull(worker)) continue;\r\n            maxId = Math.max(maxId, worker.getId());\r\n        }\r\n        nextID = maxId + 1;\r\n    }\r\n\r\n    public int getId() {\r\n        return id;\r\n    }\r\n\r\n    public void setId(int id) {\r\n        this.id = id;\r\n    }\r\n\r\n    public String getName() {\r\n        return name;\r\n    }\r\n\r\n    public void setName(String name) {\r\n        this.name = name;\r\n    }\r\n\r\n    public Coordinates getCoordinates() {\r\n        return coordinates;\r\n    }\r\n\r\n    public void setCoordinates(Coordinates coordinates) {\r\n        this.coordinates = coordinates;\r\n    }\r\n\r\n    public LocalDateTime getCreationDate() {\r\n        return creationDate;\r\n    }\r\n\r\n    public void setCreationDate(LocalDateTime creationDate) {\r\n        this.creationDate = creationDate;\r\n    }\r\n\r\n    public long getSalary() {\r\n        return salary;\r\n    }\r\n\r\n    public void setSalary(long salary) {\r\n        this.salary = salary;\r\n    }\r\n\r\n    public Position getPosition() {\r\n        return position;\r\n    }\r\n\r\n    public void setPosition(Position position) {\r\n        this.position = position;\r\n    }\r\n\r\n    public Status getStatus() {\r\n        return status;\r\n    }\r\n\r\n    public void setStatus(Status status) {\r\n        this.status = status;\r\n    }\r\n\r\n    public Person getPerson() {\r\n        return person;\r\n    }\r\n\r\n    public void setPerson(Person person) {\r\n        this.person = person;\r\n    }\r\n\r\n    /**\r\n     * Компаратор объектов, сравнивающий по зарплате\r\n     *\r\n     * @param worker the object to be compared.\r\n     */\r\n    @Override\r\n    public int compareTo(Worker worker) {\r\n        int result = (int) (this.getSalary() - worker.getSalary());\r\n        if (result == 0)\r\n            result = this.getId() - worker.getId();\r\n        return result;\r\n    }\r\n\r\n    /**\r\n     * Проверка корректности полей\r\n     *\r\n     * @return true, если все верно\r\n     */\r\n    @Override\r\n    public boolean validate() {\r\n        if (this.id < 0) return false;\r\n        if (this.name == null || this.name.isBlank()) return false;\r\n        if (this.coordinates == null) return false;\r\n        if (this.creationDate == null) return false;\r\n        if (this.salary <= 0) return false;\r\n        if (!person.validate()) return false;\r\n        return this.position != null;\r\n    }\r\n\r\n    @Override\r\n    public String toString() {\r\n        return \"Worker: \" + \"\\n\" +\r\n                \"id = \" + id + \"\\n\" +\r\n                \"name = \" + name + \"\\n\" +\r\n                \"coordinates = \" + coordinates + \"\\n\" +\r\n                \"creationDate = \" + creationDate + \"\\n\" +\r\n                \"salary = \" + salary + \"\\n\" +\r\n                \"position = \" + position + \"\\n\" +\r\n                \"status = \" + status + \"\\n\" +\r\n                \"person = \" + person + \"\\n\";\r\n    }\r\n\r\n    @Override\r\n    public int hashCode() {\r\n        return Objects.hash(id, name, coordinates, creationDate, salary, position, status, person);\r\n    }\r\n\r\n    @Override\r\n    public boolean equals(Object object) {\r\n        if (this == object) return true;\r\n        if (object == null || getClass() != object.getClass()) return false;\r\n        Worker that = (Worker) object;\r\n        if (id != that.id) return false;\r\n        if (salary != that.salary) return false;\r\n        if (!name.equals(that.name)) return false;\r\n        if (!coordinates.equals(that.coordinates)) return false;\r\n        if (!creationDate.equals(that.creationDate)) return false;\r\n        if (!position.equals(that.position)) return false;\r\n        if (!status.equals(that.status)) return false;\r\n        return Objects.equals(person, that.person);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/ru/itmo/alina/prog/models/Worker.java b/src/main/java/ru/itmo/alina/prog/models/Worker.java
+--- a/src/main/java/ru/itmo/alina/prog/models/Worker.java	(revision 851eca83246dfe577405d38a436d0847b5063e25)
++++ b/src/main/java/ru/itmo/alina/prog/models/Worker.java	(date 1681150661447)
+@@ -1,5 +1,6 @@
+ package ru.itmo.alina.prog.models;
+ 
++import java.time.LocalDate;
+ import java.time.LocalDateTime;
+ import java.util.ArrayDeque;
+ import java.util.Objects;
+@@ -14,18 +15,20 @@
+     private Coordinates coordinates; // Поле не может быть null
+     private LocalDateTime creationDate; // Поле не может быть null, значение должно генерироваться автоматически
+     private long salary; // Значение поля должно быть больше 0
++    private java.time.LocalDate startDate; // Поле не может быть null
+     private Position position; // Поле не может быть null
+     private Status status; // Поле может быть null
+     private Person person; // Поле не может быть null
+ 
+     private static int nextID = 0;
+ 
+-    public Worker(String name, Coordinates coordinates, LocalDateTime creationDate, long salary, Position position, Status status, Person person) {
++    public Worker(String name, Coordinates coordinates, LocalDateTime creationDate, long salary, LocalDate startDate, Position position, Status status, Person person) {
+         this.id = incNextId();
+         this.name = name;
+         this.coordinates = coordinates;
+         this.creationDate = creationDate;
+         this.salary = salary;
++        this.startDate = startDate;
+         this.position = position;
+         this.status = status;
+         this.person = person;
+@@ -95,6 +98,14 @@
+         this.salary = salary;
+     }
+ 
++    public LocalDate getStartDate() {
++        return startDate;
++    }
++
++    public void setStartDate(LocalDate startDate) {
++        this.startDate = startDate;
++    }
++
+     public Position getPosition() {
+         return position;
+     }
+@@ -144,6 +155,7 @@
+         if (this.coordinates == null) return false;
+         if (this.creationDate == null) return false;
+         if (this.salary <= 0) return false;
++        if (this.startDate == null) return false;
+         if (!person.validate()) return false;
+         return this.position != null;
+     }
+@@ -156,6 +168,7 @@
+                 "coordinates = " + coordinates + "\n" +
+                 "creationDate = " + creationDate + "\n" +
+                 "salary = " + salary + "\n" +
++                "startDate = " + startDate + "\n" +
+                 "position = " + position + "\n" +
+                 "status = " + status + "\n" +
+                 "person = " + person + "\n";
+@@ -163,7 +176,7 @@
+ 
+     @Override
+     public int hashCode() {
+-        return Objects.hash(id, name, coordinates, creationDate, salary, position, status, person);
++        return Objects.hash(id, name, coordinates, creationDate, salary, startDate, position, status, person);
+     }
+ 
+     @Override
+@@ -176,6 +189,7 @@
+         if (!name.equals(that.name)) return false;
+         if (!coordinates.equals(that.coordinates)) return false;
+         if (!creationDate.equals(that.creationDate)) return false;
++        if (!startDate.equals(that.startDate)) return false;
+         if (!position.equals(that.position)) return false;
+         if (!status.equals(that.status)) return false;
+         return Objects.equals(person, that.person);

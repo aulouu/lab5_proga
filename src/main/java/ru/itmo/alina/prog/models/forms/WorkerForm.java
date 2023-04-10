@@ -4,7 +4,10 @@ import ru.itmo.alina.prog.console.*;
 import ru.itmo.alina.prog.managers.ScannerManager;
 import ru.itmo.alina.prog.models.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class WorkerForm extends Forms<Worker> {
@@ -24,7 +27,7 @@ public class WorkerForm extends Forms<Worker> {
      */
     @Override
     public Worker build() {
-        return new Worker(askName(), askCoordinates(), LocalDateTime.now(), askSalary(), askPosition(), askStatus(), askPerson());
+        return new Worker(askName(), askCoordinates(), LocalDateTime.now(), askSalary(), askStartDate(), askPosition(), askStatus(), askPerson());
     }
 
     public String askName() {
@@ -60,6 +63,19 @@ public class WorkerForm extends Forms<Worker> {
                 console.printError("Зарплата должна быть числом типа long");
             } catch (Throwable throwable) {
                 console.printError("Непредвиденная ошибка!");
+            }
+        }
+    }
+
+    public LocalDate askStartDate() {
+        while (true) {
+            console.println("Введите дату начала работы в формате 2011-12-03 : ");
+            String input = scanner.nextLine().trim();
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+                return LocalDate.parse(input, formatter);
+            } catch (DateTimeParseException exception) {
+                console.printError("Неверный формат.");
             }
         }
     }

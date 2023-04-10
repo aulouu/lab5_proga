@@ -1,5 +1,6 @@
 package ru.itmo.alina.prog.models;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.Objects;
@@ -14,18 +15,20 @@ public class Worker implements Validator, Comparable<Worker> {
     private Coordinates coordinates; // Поле не может быть null
     private LocalDateTime creationDate; // Поле не может быть null, значение должно генерироваться автоматически
     private long salary; // Значение поля должно быть больше 0
+    private java.time.LocalDate startDate; // Поле не может быть null
     private Position position; // Поле не может быть null
     private Status status; // Поле может быть null
     private Person person; // Поле не может быть null
 
     private static int nextID = 0;
 
-    public Worker(String name, Coordinates coordinates, LocalDateTime creationDate, long salary, Position position, Status status, Person person) {
+    public Worker(String name, Coordinates coordinates, LocalDateTime creationDate, long salary, LocalDate startDate, Position position, Status status, Person person) {
         this.id = incNextId();
         this.name = name;
         this.coordinates = coordinates;
         this.creationDate = creationDate;
         this.salary = salary;
+        this.startDate = startDate;
         this.position = position;
         this.status = status;
         this.person = person;
@@ -95,6 +98,14 @@ public class Worker implements Validator, Comparable<Worker> {
         this.salary = salary;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
     public Position getPosition() {
         return position;
     }
@@ -144,6 +155,7 @@ public class Worker implements Validator, Comparable<Worker> {
         if (this.coordinates == null) return false;
         if (this.creationDate == null) return false;
         if (this.salary <= 0) return false;
+        if (this.startDate == null) return false;
         if (!person.validate()) return false;
         return this.position != null;
     }
@@ -156,6 +168,7 @@ public class Worker implements Validator, Comparable<Worker> {
                 "coordinates = " + coordinates + "\n" +
                 "creationDate = " + creationDate + "\n" +
                 "salary = " + salary + "\n" +
+                "startDate = " + startDate + "\n" +
                 "position = " + position + "\n" +
                 "status = " + status + "\n" +
                 "person = " + person + "\n";
@@ -163,7 +176,7 @@ public class Worker implements Validator, Comparable<Worker> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, coordinates, creationDate, salary, position, status, person);
+        return Objects.hash(id, name, coordinates, creationDate, salary, startDate, position, status, person);
     }
 
     @Override
@@ -176,6 +189,7 @@ public class Worker implements Validator, Comparable<Worker> {
         if (!name.equals(that.name)) return false;
         if (!coordinates.equals(that.coordinates)) return false;
         if (!creationDate.equals(that.creationDate)) return false;
+        if (!startDate.equals(that.startDate)) return false;
         if (!position.equals(that.position)) return false;
         if (!status.equals(that.status)) return false;
         return Objects.equals(person, that.person);
