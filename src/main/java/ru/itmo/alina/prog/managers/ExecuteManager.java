@@ -5,6 +5,8 @@ import ru.itmo.alina.prog.exceptions.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,7 +19,7 @@ import java.util.Scanner;
 public class ExecuteManager {
     private final Print console;
     private final RuntimeManager runtimeManager;
-    private static List<File> Stack = new LinkedList<>();
+    private static List<Path> Stack = new LinkedList<>();
 
     public ExecuteManager(Print console, RuntimeManager runtimeManager) {
         this.console = console;
@@ -25,7 +27,7 @@ public class ExecuteManager {
     }
 
     public void script(String fileName) {
-        Stack.add(new File(fileName));
+        Stack.add(Paths.get(fileName));
         try (Scanner scrScanner = new Scanner(new File(fileName))) {
             if (!scrScanner.hasNext()) throw new NoSuchElementException();
             Scanner tmpScanner = ScannerManager.getScanner();
@@ -36,12 +38,9 @@ public class ExecuteManager {
                 while (scrScanner.hasNextLine() && userCmd.split(" ", 2)[0].isEmpty()) {
                     userCmd = scrScanner.nextLine().trim() + " ";
                 }
-                if (userCmd.split(" ", 2)[0].equals("ExecuteScript")) {
-                    for (File script : Stack) {
-                        if (new File(userCmd.split(" ", 2)[1].trim()).equals(script)) {
-                            throw new RecursionScript();
-                        }
-                    }
+                if (userCmd.split(" ", 2)[0].equals("execute_script")) {
+                    if(Stack.contains(Paths.get(userCmd.split(" ", 2)[1].trim())))
+                        throw new RecursionScript();
                 }
                 console.println("$ " + String.join(" ", userCmd));
                 runtimeManager.start(userCmd.split(" ", 2));
