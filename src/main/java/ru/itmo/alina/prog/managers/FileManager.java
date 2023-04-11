@@ -90,7 +90,7 @@ public class FileManager {
                 System.exit(0);
             }
         } else {
-            System.out.println("Системная переменная с загрузочным файлом не найдена!");
+            System.out.println("Системная переменная LABA с загрузочным файлом не найдена!");
             System.exit(0);
         }
         return new ArrayDeque<>();
@@ -128,7 +128,7 @@ public class FileManager {
                 console.printError("Произошла непредвиденная ошибка. Коллекция не сохранена.");
             }
         } else {
-            console.printError("Системная переменная с загрузочным файлом не найдена!");
+            console.printError("Системная переменная LABA с загрузочным файлом не найдена!");
         }
         return false;
     }

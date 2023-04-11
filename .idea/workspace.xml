@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="25b3e240-cddd-43a5-bdeb-9902e69b5fc2" name="Changes" comment="voyyy">
+    <list default="true" id="25b3e240-cddd-43a5-bdeb-9902e69b5fc2" name="Changes" comment="yo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/SaveCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/ExecuteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/ExecuteManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/FileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +56,7 @@
       <workItem from="1681155100804" duration="4266000" />
       <workItem from="1681194171807" duration="131000" />
       <workItem from="1681201917195" duration="709000" />
-      <workItem from="1681203578667" duration="2577000" />
+      <workItem from="1681203578667" duration="3586000" />
     </task>
     <task id="LOCAL-00001" summary="fignya">
       <created>1681153092416</created>
@@ -102,7 +100,28 @@
       <option name="project" value="LOCAL" />
       <updated>1681203084944</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="ispravlen skript recursion">
+      <created>1681207505935</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681207505935</updated>
+    </task>
+    <task id="LOCAL-00008" summary="sozdan vremenny fail">
+      <created>1681207539908</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1681207539908</updated>
+    </task>
+    <task id="LOCAL-00009" summary="yo">
+      <created>1681207553300</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1681207553300</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +146,9 @@
     <MESSAGE value="voy" />
     <MESSAGE value="voyy" />
     <MESSAGE value="voyyy" />
-    <option name="LAST_COMMIT_MESSAGE" value="voyyy" />
+    <MESSAGE value="ispravlen skript recursion" />
+    <MESSAGE value="sozdan vremenny fail" />
+    <MESSAGE value="yo" />
+    <option name="LAST_COMMIT_MESSAGE" value="yo" />
   </component>
 </project>
