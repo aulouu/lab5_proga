@@ -7,6 +7,8 @@ import ru.itmo.alina.prog.models.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
@@ -76,7 +78,7 @@ public class FileManager {
 
             } catch (FileNotFoundException exception) {
                 console.printError("Файл не найден.");
-                System.exit(0);
+                return new ArrayDeque<>();
             } catch (NoSuchElementException exception) {
                 console.printError("Файл пустой.");
                 System.exit(0);
@@ -100,8 +102,18 @@ public class FileManager {
     /**
      * Сохранение коллекции из менеджера в файл
      */
-    public void saveCollection(Collection<Worker> collection) {
+    public boolean saveCollection(Collection<Worker> collection) {
         if (System.getenv(myenv) != null) {
+            if(!file.exists()) {
+                try {
+                    Files.createDirectories(Paths.get(System.getenv(myenv)).getParent());
+                    file.createNewFile();
+                } catch (IOException exception) {
+                    console.printError("Невозможно создать файл.");
+                    return false;
+                }
+
+            }
             if (file.exists() && !file.canRead()) {
                 console.printError("Недостаточно прав для чтения данных из файла. Добавьте права на чтение и запустите программу вновь.");
             }
@@ -109,6 +121,7 @@ public class FileManager {
                 BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(System.getenv(myenv)));
                 bufferedOutputStream.write(gson.toJson(collection).getBytes(StandardCharsets.UTF_8));
                 bufferedOutputStream.close();
+                return true;
             } catch (FileNotFoundException exception) {
                 console.printError("Файл не существует.");
             } catch (IOException exception) {
@@ -117,5 +130,6 @@ public class FileManager {
         } else {
             console.printError("Системная переменная с загрузочным файлом не найдена!");
         }
+        return false;
     }
 }

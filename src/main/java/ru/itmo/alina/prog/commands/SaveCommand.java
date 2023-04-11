@@ -29,7 +29,7 @@ public class SaveCommand extends Command {
     @Override
     public void execute(String args) throws IllegalArgument {
         if (!args.isBlank()) throw new IllegalArgument();
-        fileManager.saveCollection(collectionManager.getCollection());
-        console.print("Коллекция сохранена в файл.");
+        if(fileManager.saveCollection(collectionManager.getCollection()))
+            console.print("Коллекция сохранена в файл.");
     }
 }
