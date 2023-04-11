@@ -1,4 +1,4 @@
-Info
-Show
-ExecuteScript one.txt
-Show
+info
+show
+execute_script one.txt
+show

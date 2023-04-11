@@ -1,1 +1,1 @@
-ExecuteScript recursion.txt
+execute_script recursion.txt
