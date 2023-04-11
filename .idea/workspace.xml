@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="25b3e240-cddd-43a5-bdeb-9902e69b5fc2" name="Changes" comment="voyy">
+    <list default="true" id="25b3e240-cddd-43a5-bdeb-9902e69b5fc2" name="Changes" comment="voyyy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/ExecuteScriptCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/ExecuteScriptCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/UpdateCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/UpdateCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/SaveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/commands/SaveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/ExecuteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/ExecuteManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/alina/prog/managers/FileManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +57,8 @@
       <workItem from="1681149286638" duration="3184000" />
       <workItem from="1681155100804" duration="4266000" />
       <workItem from="1681194171807" duration="131000" />
-      <workItem from="1681201917195" duration="556000" />
+      <workItem from="1681201917195" duration="709000" />
+      <workItem from="1681203578667" duration="2577000" />
     </task>
     <task id="LOCAL-00001" summary="fignya">
       <created>1681153092416</created>
@@ -93,7 +95,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681194285453</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="voyyy">
+      <created>1681203084944</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1681203084944</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +126,7 @@
     <MESSAGE value="ono rabotaet" />
     <MESSAGE value="voy" />
     <MESSAGE value="voyy" />
-    <option name="LAST_COMMIT_MESSAGE" value="voyy" />
+    <MESSAGE value="voyyy" />
+    <option name="LAST_COMMIT_MESSAGE" value="voyyy" />
   </component>
 </project>
