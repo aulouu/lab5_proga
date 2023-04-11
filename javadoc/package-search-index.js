@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"ru.itmo.alina.prog"},{"l":"ru.itmo.alina.prog.commands"},{"l":"ru.itmo.alina.prog.console"},{"l":"ru.itmo.alina.prog.exceptions"},{"l":"ru.itmo.alina.prog.managers"},{"l":"ru.itmo.alina.prog.models"},{"l":"ru.itmo.alina.prog.models.forms"}];updateSearchResults();
